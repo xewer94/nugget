@@ -1,0 +1,217 @@
+/* Korisceni fontovi */
+
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
+
+/* Osnovna podesavanja*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+body, input, textarea {
+	font-family: 'Philosopher', sans-serif;
+}
+
+a {
+	color: #252525;
+	text-decoration: none;
+}
+
+a:hover {
+	color: rgb(162,120,106) ;
+}
+
+ul {
+	list-style-type: none;
+	flex-wrap: wrap;
+}
+
+.cistac {
+	clear: both;
+}
+
+.omotac {
+	width: 1200px;
+	margin: 0px auto;
+}
+
+.omotCrni {
+	width: 100%;
+	background-color: #252525;
+}
+
+
+/* ----- ZAGLAVLJE  ----- */
+
+#zaglavlje {
+	width: 100%;
+	height: auto;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+	background-color: #fff;
+}
+
+/* Zaglavlje gore */
+#zaglavljeGore {
+	width: 100%;
+	height: 30px;
+	background-color: #252525;
+	color: #fff;
+}
+#zaglavljeGore .omotac {
+	padding: 7px 20px;
+}
+#zaglavljeGore a {
+	color: #fff;
+}
+
+
+#info {
+	width: 33%;
+	float: left;
+}
+
+
+#logovanje {
+	width: 33%;
+	float: right;
+}
+
+#logovanje ul {
+	justify-content: flex-end;
+}
+
+#logovanje ul li:first-child {
+	border-right: 1px solid #fff;
+}
+
+#logovanje ul li {
+	padding: 0px 10px;
+}
+
+/* Zaglavlje dole */
+
+#zaglavljeDole {
+	width: 100%;
+	height: 120px;
+	background-color: #fff;
+}
+#zaglavljeDole .omotac {
+		padding: 10px 20px;
+}
+#logo {
+	width: 25%;
+	padding: 10px 0px;
+	color: rgb(81,66,67);
+	float: left;
+}
+
+#logo h1 {
+	font-size: 50px;
+	font-family: 'Berkshire Swash', cursive;
+}
+
+#logo h1 a {
+	color: rgb(162,120,106);
+}
+
+#logo p {
+	margin-top: 5px;
+	font-size: 17px;
+	text-transform: lowercase;
+}
+
+#meni {
+	width: 60%;
+	float: left;
+}
+
+#meni ul {
+
+	width: 100%;
+	height: 120px;
+	list-style-type: none;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#meni ul li {
+	font-size: 125px;
+}
+
+#dugmeMeni {
+	float: right;
+	height: auto;
+	width: auto;
+	display: none;
+}
+
+#dugmeMeni a {
+	display: inline-block;
+	background-color: rgba(237,214,198, 0.9);
+	padding: 15px 30px;
+	color: rgb(162,120,106);
+	border-radius: 5px;
+	margin-top: 25px;
+	text-transform: uppercase;
+	font-size: 20px;
+}
+
+#dugmeMeni a i {
+	margin-left: 10px;
+}
+
+
+
+/* ----- SLAJDER  ----- */
+
+#slajder {
+	margin-top: 150px;
+	width: 100%;
+	height: 550px;
+	background-image: url('../images/slider.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 47%;
+	
+}
+
+#slajder .omotac {
+	height: 100%;
+	position: relative;
+}
+
+#slajderTekst {
+	width: 530px;
+	position: absolute;
+	top: 10%;
+}
+
+#slajderTekst h2{
+	font-family: 'Berkshire Swash', cursive;
+	color: rgba(237,214,198, 0.9);
+	font-size: 55px;
+}
+
+#slajderTekst p {
+	margin-top: 30px;
+	color: #ccc;
+	font-size: 21px;
+}
+
+#btnKolekcija {
+	font-family: 'Berkshire Swash', cursive;
+	background-color: rgba(237,214,198, 0.9);
+	font-size: 30px;
+	border-radius: 5px;
+	margin-top: 30px;
+	padding: 7px 20px;
+	display: inline-block;
+}
+
+

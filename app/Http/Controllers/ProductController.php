@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Gallery;
 use App\Http\Requests\ProductCreateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -100,18 +99,6 @@ class ProductController extends Controller
         $test->user_id = auth()->user()->id;
         $test->image = $fileNameToStore;
         $test->update();
-
-        $galleryImages = request()->get('gallery');
-
-        $gallery = new Gallery();
-
-        foreach ($galleryImages as $image) {
-            // upload image
-            //
-            $gallery->name = '',
-            $gallery->product_id = $test->id,
-            $gallery->save
-        }
 
 
         return redirect('/watches')->with('success', 'Watch added');

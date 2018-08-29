@@ -29,7 +29,7 @@
             <div class="well">
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
-                        <a href="{{ url('/watches/'.$product->brand->slug.'/'.$product->slug)}}"> <img style="width:100%" src="/nugget/public/storage/cover_images/{{$product->image}}"></a>
+                        <a href="{{ url('/watches/'.$product->brand->slug.'/'.$product->slug)}}"> <img style="width:100%" src="{{ asset('storage/image/' . $product->image) }}"></a>
                         </div>
                     <div class="col-md-8 col-sm-8">
                     <h3><a href="{{ url('/watches/'.$product->brand->slug.'/'.$product->slug)}}">{{$product->name}}</a></h3>

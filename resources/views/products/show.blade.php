@@ -3,14 +3,14 @@
 @include('inc.messages')
 
 @section('content')
-    <a href="/nugget/public/watches" class="btn btn-default">Go Back</a>
+    <a href="{{ url()->previous() }}" class="btn btn-default">Go Back</a>
     
     <h1>{{$product->title}}</h1>
     <br><br>
     <div class="product-section container">
         <div>
             <div class="product-section-image">
-                    <img style="width:200px" src="/nugget/public/storage/cover_images/{{$product->cover_image}}">
+                <img style="width:200px" src="{{ asset('storage/image/' . $product->image) }}">
             </div>
             <div class="product-section-information">
                     <h1 class="product-section-title">{!!$product->name!!}</h1>

@@ -6,7 +6,7 @@
         <h3>Brands</h3>
         <ul>
 
-            @if(Route::getCurrentRoute()->uri() == 'watches')
+            @if(Route::getCurrentRoute()->uri() == 'watches' || Route::getCurrentRoute()->uri() == 'search')
                 @foreach($brands as $brand)
                     <li><a href="{{ route('watches.index', ['brand' => $brand->name]) }}"> {{$brand->name}} </a></li>
                 @endforeach

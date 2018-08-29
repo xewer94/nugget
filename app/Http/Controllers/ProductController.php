@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
     }
 
     /**
@@ -220,5 +220,22 @@ class ProductController extends Controller
         
         $product->delete();
         return redirect('/watches')->with('success', 'Watch deleted');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->has('search')) {
+
+            // Get brands list
+            $brands = Brand::all();
+
+            // Search for products
+            $products = Product::with('brand')
+                // Get product's collection where name is similar to search value
+                ->where('name', 'like', '%'.$request->search.'%')
+                ->paginate(10);
+
+            return view('products.index', compact('brands', 'products'));
+        }
     }
 }

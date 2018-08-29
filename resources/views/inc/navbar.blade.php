@@ -22,14 +22,20 @@
 						</div>
 						<div id="meni">
 							<ul>
-								<li ><a href="/nugget/public">Home</a></li>
+								<li ><a href="{{ url('/') }}">Home</a></li>
 								<li ><a href="{{ route('watches.show', ['slug' => 'Men']) }}">Men</a></li>
 								<li ><a href="{{ route('watches.show', ['slug' => 'Women']) }}">Women</a></li>
 								<li ><a href="">Contact us</a></li>		
 							</ul>
 						</div>
 						
-						
+						<div id="search">
+							<form action="{{ route('search') }}" method="POST">
+								{{ csrf_field() }}
+								<input type="text" name="search" placeholder="Trazi">
+								<button type="submit" class="btn btn-primary">Search</button>
+							</form>
+						</div>
 						
 						<div class="cistac"></div>
 					</div>

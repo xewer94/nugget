@@ -32,6 +32,7 @@ Route::resource('shop', 'ShopController');
 Route::resource('watches', 'ProductController');
 Route::get('/watches/{slugBrand}/{slugProduct}', 'ProductController@showProduct');
 Route::post('/watches/{slugBrand}/{slugProduct}/comments', 'CommentsController@store')->name('watches.comment');
+Route::post('/search', 'ProductController@search')->name('search');
 
 Auth::routes();
 

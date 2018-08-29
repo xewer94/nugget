@@ -36,3 +36,7 @@ Route::post('/watches/{slugBrand}/{slugProduct}/comments', 'CommentsController@s
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+
+// Product comparing
+Route::get('compare/{id}', 'CompareController@compare');
+Route::get('comparing', 'CompareController@comparing')->name('comparing');

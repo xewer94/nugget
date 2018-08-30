@@ -30,18 +30,24 @@ class ProductController extends Controller
     public function index()
 
     {
+        // If there is brand in request, get products based on selected brand
         if(request()->brand) {
 
-            $products = Product::with('brand')->whereHas('brand', function($query) {
-                $query->where('slug', request()->brand);
-            })
+            // Eager load brand relation for product (optional, will still works without it but with more db queries)
+            $products = Product::with('brand')
+                // Get products where brand is equal to brand value from request form
+                ->whereHas('brand', function($query) {
+                    $query->where('slug', request()->brand);
+                })
                 ->paginate(10);
             $brands = Brand::all();
 
-        } else {
+        }
+        // If there isn't brand in form request, load all products sorted by created date descending
+        else {
 
-        $products = Product::orderBy('created_at','desc')->paginate(6);
-        $brands = Brand::all();
+            $products = Product::orderBy('created_at','desc')->paginate(6);
+            $brands = Brand::all();
         }
 
         return view('products.index')->with([
@@ -91,14 +97,18 @@ class ProductController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
-        // Add watch
+        // Get object instance of product model
         $product = new Product;
 
-        $test = $product->create($request->except('image'));
-        $test->slug = str_slug($test->name);
-        $test->user_id = auth()->user()->id;
-        $test->image = $fileNameToStore;
-        $test->update();
+        // Insert product fields into db except field for image
+        $createdProduct = $product->create($request->except('image'));
+
+        // Since product is created, his object model instance is stored in $createdProduct,
+        // that means that we can directly update that product without doing "Product::find(..)"
+        $createdProduct->slug = str_slug($createdProduct->name);
+        $createdProduct->user_id = auth()->user()->id;
+        $createdProduct->image = $fileNameToStore;
+        $createdProduct->update();
 
 
         return redirect('/watches')->with('success', 'Watch added');
@@ -110,21 +120,30 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($categorySlug)
     {
         $brands = Brand::all();
         $categories = Category::all();
-        $products = Product::with('brand')->whereHas('category', function ($query) use ($slug){
-            $query->where('name', $slug);
-        });
 
+        // Eager load brand relation, not necessary, will still work but with more db queries
+        $products = Product::with('brand')
+            // Get products who has category slug equal to slug value from url parameter $categorySlug
+            ->whereHas('category', function ($query) use ($categorySlug){
+                $query->where('name', $categorySlug);
+            });
+
+        // Since we building product db query with eloquent, we can chain "where" clauses
+        // If there is brand value in form request query, get it...
         if (request()->brand) {
             $brand = request()->brand;
+
+            // Chain "where" clause - where product's brand slug is ...
             $products = $products->whereHas('brand', function ($query) use ($brand) {
                 $query->where('slug', $brand);
             });
         }
 
+        // Chain pagination and run product query to receive result
         $products = $products->paginate(10);
 
         return view('products.index', compact('brands', 'categories', 'products'));
@@ -132,7 +151,12 @@ class ProductController extends Controller
 
     public function showProduct($brandSlug, $productSlug)
     {
-        $product = Product::with('comments.user')->where('slug', $productSlug)->first();
+        // Eager load nested relationship, load comments for products and users-authors of comments
+        $product = Product::with('comments.user')
+            // Get products where slug is equal to $productSlug
+            ->where('slug', $productSlug)
+            // Get first product with above condition
+            ->first();
 
         return view('products.show', ['product' => $product]);
     }
@@ -162,38 +186,35 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductCreateRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'price' => 'required'
-        ]);
-
          // Handle File Upload
-        if($request->hasFile('cover_image')){
+        if($request->hasFile('image')){
             // Get filename with the extension
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
             // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             // Get just ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $extension = $request->file('image')->getClientOriginalExtension();
             // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+            $path = $request->file('image')->storeAs('public/image', $fileNameToStore);
         }
 
-        // Add watch
-        $product = new Product;
+        // Get product instance
+        $product = Product::find($id);
+
+        // Since variable $product have product object instance, we can fill data and update it
         $product->name = $request->input('name');
         $product->slug = $request->input('slug');
         $product->details = $request->input('details');
         $product->price = $request->input('price');
         $product->description = $request->input('description');
-        if($request->hasFile('cover_image')){
-            $product->cover_image = $fileNameToStore;
+        if($request->hasFile('image')){
+            $product->image = $fileNameToStore;
         }
-        $product->save();
+        $product->update();
 
         return redirect('/watches')->with('success', 'Watch updated');
     }
@@ -213,9 +234,9 @@ class ProductController extends Controller
             return redirect('/watches')->with('error', 'Unauthorized Page');
         }
 
-        if($product->cover_image != 'noimage.jpg'){
+        if($product->image != 'noimage.jpg'){
             // Delete Image
-            Storage::delete('public/cover_images/'.$product->cover_image);
+            Storage::delete('public/image/'.$product->image);
         }
         
         $product->delete();

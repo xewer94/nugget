@@ -216,7 +216,7 @@ class ProductController extends Controller
         }
         $product->update();
 
-        return redirect('/watches')->with('success', 'Watch updated');
+        return redirect('/dashboard')->with('success', 'Watch updated');
     }
 
     /**

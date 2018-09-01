@@ -48,7 +48,7 @@ class CompareController extends Controller
      */
     public function comparing()
     {
-        // Fist check if there is both products in session
+        // First check if there is both products in session
         if (!session()->has('product1_to_compare') || !session()->has('product2_to_compare')) {
             return abort(404);
         }

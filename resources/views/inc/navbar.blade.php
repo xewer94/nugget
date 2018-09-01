@@ -25,14 +25,14 @@
 								<li ><a href="{{ url('/') }}">Home</a></li>
 								<li ><a href="{{ route('watches.show', ['slug' => 'Men']) }}">Men</a></li>
 								<li ><a href="{{ route('watches.show', ['slug' => 'Women']) }}">Women</a></li>
-								<li ><a href="">Contact us</a></li>		
+								<li ><a href="">Contact us</a></li>
 							</ul>
 						</div>
 						
 						<div id="search">
 							<form action="{{ route('search') }}" method="POST">
 								{{ csrf_field() }}
-								<input type="text" name="search" placeholder="Trazi">
+								<input type="text" name="search" placeholder="">
 								<button type="submit" class="btn btn-primary">Search</button>
 							</form>
 						</div>
@@ -58,8 +58,10 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								{{ Auth::user()->name }} <span class="caret"></span>
 							</a>
-	
+
 							<ul class="dropdown-menu" role="menu">
+								{{ Auth::user()->admin }} <span class="caret"></span>
+
 								<li><a href="/nugget/public/dashboard">Dashboard</a></li>
 								<li>
 									<a href="{{ route('logout') }}"
@@ -67,7 +69,7 @@
 												  document.getElementById('logout-form').submit();">
 										Logout
 									</a>
-	
+
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 										{{ csrf_field() }}
 									</form>

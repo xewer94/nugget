@@ -21,7 +21,6 @@
             @endif
         </ul>
     </div>
-    <h1>Men</h1>
     <div class="products text-center">
     @if(isset($products) && count($products) > 0)
         @foreach($products as $product)

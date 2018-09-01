@@ -24,6 +24,11 @@
         </div>
     </div>
 
+    <div class="modal_pro_compare">
+        <a href="{{ route ('comparing') }}" class="btn btn-default">Compare</a>
+    </div>
+
+
     <hr>
     
     <div class="comments">
@@ -40,6 +45,16 @@
         @endforeach
     </ul>
     </div>
+    @if(!Auth::guest())
+        @if(Auth::user()->id == $product->user_id)
+            <th> <a href="{{ route('watches.edit', ['product' => $product->id]) }}" class="btn btn-info">Edit</a> </th>
+
+            {!!Form::open(['action' => ['ProductController@destroy', $product->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+            {{Form::hidden('_method', 'DELETE')}}
+            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+            {!!Form::close()!!}
+        @endif
+    @endif
             <hr>
 
     <div class="card">
@@ -65,14 +80,5 @@
         </div>
     </div>
    
-    @if(!Auth::guest())
-        @if(Auth::user()->id == $product->user_id)
-            <a href="/nugget/public/watches/{{$product->id}}/edit" class="btn btn-default">Edit</a>
 
-            {!!Form::open(['action' => ['ProductController@destroy', $product->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
-                {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-            {!!Form::close()!!}
-        @endif
-    @endif
 @endsection

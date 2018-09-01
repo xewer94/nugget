@@ -31,20 +31,5 @@ class Product extends Model
         return $this->belongsTo('App\User');
     }
 
-
-    //public function addComment($body)
-    //  {
-
-    //$this->comments()->create(compact('body'));
-    //Comment::create([
-    //    'body' => $body,
-    //    'product_id' => $this->id
-
-
-    // ]);
-
-
-    // }
-
 }
 

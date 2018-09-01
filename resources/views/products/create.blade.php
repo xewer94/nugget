@@ -5,7 +5,7 @@
     {!! Form::open(['action' => 'ProductController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
     {{ @csrf_field() }}
         <div class="form-group">
-            {{Form::label('name', 'Name')}}
+            {{Form::label('name', 'Brand')}}
             <select class="form-control" name="brand_id">
                 @foreach($brands as $brand)
                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -13,7 +13,7 @@
             </select>
         </div>
         <div class="form-group">
-            {{Form::label('name', 'Djender')}}
+            {{Form::label('name', 'Gender')}}
             <select class="form-control" name="category_id">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>

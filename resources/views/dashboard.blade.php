@@ -42,6 +42,7 @@
 
                 </div>
             </div>
+            {{ $products->links() }}
         </div>
     </div>
 </div>

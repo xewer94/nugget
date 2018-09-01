@@ -62,7 +62,7 @@
 							<ul class="dropdown-menu" role="menu">
 								{{ Auth::user()->admin }} <span class="caret"></span>
 
-								<li><a href="/nugget/public/dashboard">Dashboard</a></li>
+								<li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
 								<li>
 									<a href="{{ route('logout') }}"
 										onclick="event.preventDefault();

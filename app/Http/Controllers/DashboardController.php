@@ -26,8 +26,9 @@ class DashboardController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
+        $products = Product::where('user_id', $user_id)->paginate(1);
 
-        return view('dashboard')->with('products', $user->products);
+        return view('dashboard')->with('products', $products);
 
     }
 

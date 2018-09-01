@@ -25,7 +25,7 @@
     </div>
 
     <div class="modal_pro_compare">
-        <a href="{{ route ('comparing') }}" class="btn btn-default">Compare</a>
+        <a href="{{ url('compare/'. $product->id) }}" class="btn btn-default">Compare</a>
     </div>
 
 

@@ -39,8 +39,8 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index');
 
 // Product comparing
-Route::get('compare/{id}', 'CompareController@compare');
-Route::get('comparing', 'CompareController@comparing')->name('comparing');
+Route::get('compare/{id}', 'CompareController@compare'); // use this when adding products
+Route::get('comparing', 'CompareController@comparing')->name('comparing'); // this route will be automatic called when 2 watches are selected
 
 //Product insert
 Route::group(['middleware' => 'auth'] , function(){

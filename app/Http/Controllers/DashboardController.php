@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -26,7 +26,7 @@ class DashboardController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $products = Product::where('user_id', $user_id)->paginate(1);
+        $products = Product::where('user_id', $user_id)->paginate(5);
 
         return view('dashboard')->with('products', $products);
 

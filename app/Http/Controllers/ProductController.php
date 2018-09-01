@@ -39,7 +39,7 @@ class ProductController extends Controller
                 ->whereHas('brand', function($query) {
                     $query->where('slug', request()->brand);
                 })
-                ->paginate(10);
+                ->paginate(6);
             $brands = Brand::all();
 
         }
@@ -93,6 +93,7 @@ class ProductController extends Controller
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
             $path = $request->file('image')->storeAs('public/image', $fileNameToStore);
+
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -144,7 +145,7 @@ class ProductController extends Controller
         }
 
         // Chain pagination and run product query to receive result
-        $products = $products->paginate(10);
+        $products = $products->paginate(6);
 
         return view('products.index', compact('brands', 'categories', 'products'));
     }
@@ -254,7 +255,7 @@ class ProductController extends Controller
             $products = Product::with('brand')
                 // Get product's collection where name is similar to search value
                 ->where('name', 'like', '%'.$request->search.'%')
-                ->paginate(10);
+                ->paginate(6);
 
             return view('products.index', compact('brands', 'products'));
         }

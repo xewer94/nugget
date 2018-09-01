@@ -44,6 +44,10 @@
         <div class="form-group">
             {{Form::file('image')}}
         </div>
+        <div class="form-group">
+            {{Form::file('image')}}
+        </div>
+
         {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
 @endsection

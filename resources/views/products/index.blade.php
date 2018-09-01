@@ -43,7 +43,9 @@
         </div>
         {{$products->links()}}
     @else
-        <p>No watches found</p>
+        <div class="nothing">
+        <h1>No watches found</h1>
+        </div>
     @endif
     
 </div>

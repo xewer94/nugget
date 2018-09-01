@@ -16,38 +16,5 @@
 		</div>
 	</div>
 
-<div class="omotac sekcija">
-	<div class="naslov">
-		<div class="linija"></div>
-		<h3>Categories</h3>
-		<div class="linija"></div>
-		<div class="cistac"></div>
-	</div>
-	<div id="kategorije">
-		<div class="kategorija" id="zenskiSatovi">
-			<div class="kategorijaTekst">
-				<div class="kategorijaOpis">
-					<p>Ladies' watches</p>
-				</div>
-				<div class="dugmeShop">
-					<a href="women.html">Shop now <i class="fa fa-angle-double-right"></i></a>
-				</div>
-				<div class="cistac"></div>
-			</div>
-		</div>
-		<div class="kategorija" id="muskiSatovi">
-			<div class="kategorijaTekst">
-				<div class="kategorijaOpis">
-					<p>Men's watches</p>
-				</div>
-				<div class="dugmeShop">
-					<a href="men.html">Shop now <i class="fa fa-angle-double-right"></i></a>
-				</div>
-				<div class="cistac"></div>
-			</div>
-		</div>
-		<div class="cistac"></div>
-	</div>
-</div>
 
 @endsection

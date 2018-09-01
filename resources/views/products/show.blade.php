@@ -4,33 +4,36 @@
 
 @section('content')
     <a href="{{ url()->previous() }}" class="btn btn-default">Go Back</a>
-    
     <h1>{{$product->title}}</h1>
     <br><br>
     <div class="product-section container">
-        <div>
+
             <div class="product-section-image">
+
                 <img style="width:200px" src="{{ asset('storage/image/' . $product->image) }}">
             </div>
+        <div class="product-section-image">
+
+            <img style="width:200px" src="{{ asset('storage/image/' . $product->image) }}">
+        </div>
+
+            <div class="col-12 col-md-6">
             <div class="product-section-information">
                     <h1 class="product-section-title">{!!$product->name!!}</h1>
+                    <h1 class="product-section-price"> $ {!!$product->price!!}</h1>
                     <div class="product-section-subtitle">{!!$product->details!!} </div>
-                    <div class="product-section-price"> {!!$product->price!!}</div>
-                    <p>
-                    {!!$product->description!!}
-                    </p>
+                    <h1>{!!$product->description!!}</h1>
+                    <a href="{{ url('compare/'. $product->id) }}" class="btn btn-info">Compare</a>
 
             </div>
         </div>
     </div>
 
-    <div class="modal_pro_compare">
-        <a href="{{ url('compare/'. $product->id) }}" class="btn btn-default">Compare</a>
-    </div>
 
 
+<div class="cistac"></div>
     <hr>
-    
+    <div class="wrapper">
     <div class="comments">
         <ul class="list-group">
         @foreach ($product->comments as $comment)
@@ -39,11 +42,12 @@
             <strong>
                     {{$comment->created_at->diffForHumans() }}: &nbsp;
             </strong>
-        
+
                 {{$comment->body}}
         </li>
         @endforeach
     </ul>
+    </div>
     </div>
     @if(!Auth::guest())
         @if(Auth::user()->id == $product->user_id)

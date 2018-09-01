@@ -25,15 +25,14 @@
 
                              <th><a href="{{ url('/watches/'.$product->brand->slug.'/'.$product->slug)}}"> <img style="width:8%" src="{{ asset('storage/image/' . $product->image) }}">
                                  {{$product->name}}</th></a>
-                             @if(!Auth::guest())
-                                 @if(!Auth::user()->id == $product->admin)
+
+
                                      <th> <a href="{{ route('watches.edit', ['product' => $product->id]) }}" class="btn btn-info">Edit</a> </th>
                                      <th>{!!Form::open(['action' => ['ProductController@destroy', $product->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                                      {{Form::hidden('_method', 'DELETE')}}
                                      {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                          {!!Form::close()!!} </th>
-                                 @endif
-                             @endif
+
                          </tr>
                          @endforeach
 
@@ -41,9 +40,22 @@
                     </table>
 
                 </div>
+                {{ $products->links() }}
+
             </div>
             {{ $products->links() }}
         </div>
     </div>
 </div>
 @endsection
+
+@section ('appendCss')
+    <style>
+        .btn-info {
+            color: #fff;
+            background-color: #8eb4cb;
+            border-color: #7da8c3;
+            margin-left: -100px;
+        }
+
+        </style>
